@@ -1,15 +1,105 @@
+<!-- Features Section -->
 <section class="features">
   <div class="container">
-    <h2 class="section-title">Características Principales</h2>
+    <h2
+      class="section-title"
+      appScrollAnimation
+      animationType="fade-in"
+      [animationDuration]="600"
+      [animationOnce]="false"
+    >
+      Características Principales
+    </h2>
 
     <div class="features-grid">
-      @for (feature of features(); track feature.title) {
-        <div class="feature-card">
+      @for (feature of features(); track feature.title; let i = $index) {
+        <div
+          class="feature-card"
+          appScrollAnimation
+          animationType="slide-up"
+          [animationDelay]="i * 100"
+          [animationDuration]="800"
+          [animationOnce]="false"
+        >
           <div class="feature-icon">{{ feature.icon }}</div>
           <h3 class="feature-title">{{ feature.title }}</h3>
           <p class="feature-description">{{ feature.description }}</p>
         </div>
       }
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      @for (stat of stats(); track stat.label; let i = $index) {
+        <div
+          class="stat-card"
+          appScrollAnimation
+          animationType="scale-up"
+          [animationDelay]="i * 150"
+          [animationDuration]="700"
+          [animationOnce]="false"
+        >
+          <h3 class="stat-number">{{ stat.number }}</h3>
+          <p class="stat-label">{{ stat.label }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="container">
+    <h2
+      class="section-title"
+      appScrollAnimation
+      animationType="fade-in"
+      [animationDuration]="600"
+      [animationOnce]="false"
+    >
+      Lo Que Dicen Nuestros Clientes
+    </h2>
+
+    <div class="testimonials-grid">
+      @for (testimonial of testimonials(); track testimonial.name; let i = $index) {
+        <div
+          class="testimonial-card"
+          appScrollAnimation
+          animationType="slide-right"
+          [animationDelay]="i * 200"
+          [animationDuration]="800"
+          [animationOnce]="false"
+        >
+          <div class="testimonial-avatar">{{ testimonial.avatar }}</div>
+          <p class="testimonial-comment">"{{ testimonial.comment }}"</p>
+          <div class="testimonial-author">
+            <p class="author-name">{{ testimonial.name }}</p>
+            <p class="author-role">{{ testimonial.role }} - {{ testimonial.company }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+  <div
+    class="container"
+    appScrollAnimation
+    animationType="zoom-in"
+    [animationDuration]="900"
+    [animationOnce]="false"
+  >
+    <h2 class="cta-title">¿Listo para Transformar tu Presencia Digital?</h2>
+    <p class="cta-subtitle">Contáctanos hoy y descubre cómo podemos ayudarte</p>
+    <div class="cta-buttons">
+      <button class="btn-primary">Comenzar Ahora</button>
+      <button class="btn-secondary">Hablar con un Experto</button>
     </div>
   </div>
 </section>
