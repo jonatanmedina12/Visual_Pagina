@@ -1,0 +1,94 @@
+<aside class="sidebar" [class.collapsed]="isCollapsed()">
+  <!-- Sidebar Header -->
+  <div class="sidebar-header">
+    <div class="brand" [class.hidden]="isCollapsed()">
+      <mat-icon class="brand-icon">auto_awesome</mat-icon>
+      <span class="brand-text">Visual<span class="accent">Page</span></span>
+    </div>
+    <button mat-icon-button class="toggle-btn" (click)="toggleSidebar()" [matTooltip]="isCollapsed() ? 'Expand' : 'Collapse'">
+      <mat-icon>{{ isCollapsed() ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+    </button>
+  </div>
+
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar-nav">
+    <ul class="menu-list">
+      @for (item of menuItems(); track item.label) {
+        <li class="menu-item">
+          @if (item.subItems) {
+            <!-- Item with dropdown -->
+            <button
+              class="menu-link"
+              [class.active]="isExpanded(item.label)"
+              (click)="toggleItem(item.label)"
+              [matTooltip]="isCollapsed() ? item.label : ''"
+              matTooltipPosition="right"
+            >
+              <div class="menu-link-content">
+                <mat-icon class="menu-icon">{{ item.icon }}</mat-icon>
+                <span class="menu-label" [class.hidden]="isCollapsed()">{{ item.label }}</span>
+                @if (item.badge && !isCollapsed()) {
+                  <span class="badge">{{ item.badge }}</span>
+                }
+              </div>
+              @if (!isCollapsed()) {
+                <mat-icon class="expand-icon" [class.expanded]="isExpanded(item.label)">
+                  expand_more
+                </mat-icon>
+              }
+            </button>
+
+            <!-- Dropdown content -->
+            <ul class="submenu" [class.expanded]="isExpanded(item.label)" [class.collapsed-parent]="isCollapsed()">
+              @for (subItem of item.subItems; track subItem.route) {
+                <li class="submenu-item">
+                  <a
+                    [routerLink]="subItem.route"
+                    routerLinkActive="active"
+                    class="submenu-link"
+                  >
+                    <span class="submenu-dot"></span>
+                    <span class="submenu-label">{{ subItem.label }}</span>
+                    @if (subItem.badge) {
+                      <span class="badge small">{{ subItem.badge }}</span>
+                    }
+                  </a>
+                </li>
+              }
+            </ul>
+          } @else {
+            <!-- Simple link -->
+            <a
+              [routerLink]="item.route"
+              routerLinkActive="active"
+              class="menu-link"
+              [matTooltip]="isCollapsed() ? item.label : ''"
+              matTooltipPosition="right"
+            >
+              <div class="menu-link-content">
+                <mat-icon class="menu-icon">{{ item.icon }}</mat-icon>
+                <span class="menu-label" [class.hidden]="isCollapsed()">{{ item.label }}</span>
+                @if (item.badge && !isCollapsed()) {
+                  <span class="badge">{{ item.badge }}</span>
+                }
+              </div>
+            </a>
+          }
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <!-- Sidebar Footer -->
+  <div class="sidebar-footer" [class.hidden]="isCollapsed()">
+    <div class="user-profile">
+      <div class="user-avatar">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+      <div class="user-info">
+        <p class="user-name">John Doe</p>
+        <p class="user-role">Administrator</p>
+      </div>
+    </div>
+  </div>
+</aside>
