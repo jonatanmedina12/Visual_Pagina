@@ -1,0 +1,67 @@
+<footer class="footer">
+  <div class="footer-content">
+    <div class="container">
+      <!-- Top Section -->
+      <div class="footer-top">
+        <!-- Brand Section -->
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <mat-icon class="brand-icon">auto_awesome</mat-icon>
+            <h3 class="brand-name">Visual<span class="brand-accent">Page</span></h3>
+          </div>
+          <p class="brand-description">
+            Creando experiencias web modernas y profesionales que impulsan tu negocio al siguiente
+            nivel.
+          </p>
+          <!-- Social Links -->
+          <div class="social-links">
+            @for (social of socialLinks(); track social.name) {
+              <a
+                [href]="social.url"
+                [attr.aria-label]="social.name"
+                mat-icon-button
+                class="social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <mat-icon>{{ social.icon }}</mat-icon>
+              </a>
+            }
+          </div>
+        </div>
+
+        <!-- Links Sections -->
+        <div class="footer-links">
+          @for (section of footerSections(); track section.title) {
+            <div class="footer-section">
+              <h4 class="section-title">{{ section.title }}</h4>
+              <ul class="link-list">
+                @for (link of section.links; track link.url) {
+                  <li>
+                    <a [routerLink]="link.url" class="footer-link">
+                      {{ link.title }}
+                    </a>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        </div>
+      </div>
+
+      <mat-divider class="footer-divider"></mat-divider>
+
+      <!-- Bottom Section -->
+      <div class="footer-bottom">
+        <div class="copyright">
+          <p>© {{ currentYear() }} VisualPage. Todos los derechos reservados.</p>
+        </div>
+        <div class="footer-meta">
+          <p>
+            Hecho con <mat-icon class="heart-icon">favorite</mat-icon> por el equipo de VisualPage
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

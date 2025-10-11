@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Angular Material Theme - Corporate Colors
+@use '@angular/material' as mat
+
+// Include Material core styles
+@include mat.core()
+
+// Define custom corporate palette
+$corporate-primary: ( 50: #e8eaf6, 100: #c5cae9, 200: #9fa8da, 300: #1a365d, 400: #0f2744, 500: #0a1f3f, 600: #081933, 700: #061428, 800: #04101c, 900: #020a10, contrast: ( 50: rgba(black, 0.87), 100: rgba(black, 0.87), 200: rgba(black, 0.87), 300: white, 400: white, 500: white, 600: white, 700: white, 800: white, 900: white, ) )
+
+$corporate-accent: ( 50: #fff3e0, 100: #ffe0b2, 200: #ffcc80, 300: #ffb74d, 400: #ffa726, 500: #d97706, 600: #c56507, 700: #b05408, 800: #9c4409, 900: #7c3509, contrast: ( 50: rgba(black, 0.87), 100: rgba(black, 0.87), 200: rgba(black, 0.87), 300: rgba(black, 0.87), 400: rgba(black, 0.87), 500: white, 600: white, 700: white, 800: white, 900: white, ) )
+
+$visual-page-primary: mat.m2-define-palette($corporate-primary, 500, 300, 700)
+$visual-page-accent: mat.m2-define-palette($corporate-accent, 500, 400, 600)
+$visual-page-warn: mat.m2-define-palette(mat.$m2-red-palette)
+
+// Create the theme
+$visual-page-theme: mat.m2-define-light-theme((color: (primary: $visual-page-primary, accent: $visual-page-accent, warn: $visual-page-warn)))
+
+// Include theme styles for core and each component
+@include mat.all-component-themes($visual-page-theme)
+
+// Global styles
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+html, body
+  height: 100%
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+body
+  background-color: #ffffff
+  color: #1f2937
