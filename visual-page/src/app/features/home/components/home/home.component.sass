@@ -58,6 +58,132 @@
   line-height: 1.7
   font-size: 1rem
 
+// Stats Section
+.stats
+  padding: 80px 20px
+  background: linear-gradient(135deg, #0a1f3f 0%, #1a365d 100%)
+  color: white
+
+  .stats-grid
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+    gap: 3rem
+    margin-top: 2rem
+
+.stat-card
+  text-align: center
+  padding: 2rem
+
+  .stat-number
+    font-size: 3.5rem
+    font-weight: 700
+    color: #d97706
+    margin-bottom: 0.5rem
+
+  .stat-label
+    font-size: 1.1rem
+    color: rgba(255, 255, 255, 0.9)
+    font-weight: 400
+
+// Testimonials Section
+.testimonials
+  padding: 100px 20px
+  background-color: #f9fafb
+
+  .testimonials-grid
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))
+    gap: 2rem
+    margin-top: 3rem
+
+.testimonial-card
+  background: white
+  padding: 2.5rem
+  border-radius: 12px
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08)
+  transition: all 0.3s ease
+
+  &:hover
+    transform: translateY(-5px)
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12)
+
+  .testimonial-avatar
+    font-size: 3rem
+    text-align: center
+    margin-bottom: 1.5rem
+
+  .testimonial-comment
+    font-size: 1.1rem
+    line-height: 1.8
+    color: #4b5563
+    margin-bottom: 1.5rem
+    font-style: italic
+
+  .testimonial-author
+    border-top: 2px solid #e5e7eb
+    padding-top: 1rem
+
+    .author-name
+      font-size: 1.1rem
+      font-weight: 600
+      color: #0a1f3f
+      margin-bottom: 0.25rem
+
+    .author-role
+      font-size: 0.9rem
+      color: #6b7280
+
+// CTA Section
+.cta
+  padding: 100px 20px
+  background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%)
+  color: white
+  text-align: center
+
+  .cta-title
+    font-size: 3rem
+    font-weight: 700
+    margin-bottom: 1rem
+    color: white
+
+  .cta-subtitle
+    font-size: 1.3rem
+    margin-bottom: 2.5rem
+    opacity: 0.95
+
+  .cta-buttons
+    display: flex
+    gap: 1.5rem
+    justify-content: center
+    flex-wrap: wrap
+
+    .btn-primary,
+    .btn-secondary
+      padding: 16px 40px
+      font-size: 1.1rem
+      font-weight: 600
+      border-radius: 8px
+      cursor: pointer
+      transition: all 0.3s ease
+      border: 2px solid white
+
+    .btn-primary
+      background: white
+      color: #d97706
+
+      &:hover
+        transform: translateY(-3px)
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2)
+
+    .btn-secondary
+      background: transparent
+      color: white
+
+      &:hover
+        background: rgba(255, 255, 255, 0.1)
+        transform: translateY(-3px)
+
+// Responsive
 @media (max-width: 768px)
   .features
     padding: 60px 20px
@@ -71,3 +197,37 @@
 
   .feature-card
     padding: 1.5rem
+
+  .stats
+    padding: 60px 20px
+
+    .stats-grid
+      grid-template-columns: repeat(2, 1fr)
+      gap: 2rem
+
+  .stat-card
+    .stat-number
+      font-size: 2.5rem
+
+  .testimonials
+    padding: 60px 20px
+
+    .testimonials-grid
+      grid-template-columns: 1fr
+
+  .cta
+    padding: 60px 20px
+
+    .cta-title
+      font-size: 2rem
+
+    .cta-subtitle
+      font-size: 1.1rem
+
+    .cta-buttons
+      flex-direction: column
+
+      .btn-primary,
+      .btn-secondary
+        width: 100%
+        max-width: 300px
