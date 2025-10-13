@@ -1,0 +1,42 @@
+<div class="dashboard-content">
+  <!-- Page Header -->
+  <div class="dashboard-header">
+    <h1 class="dashboard-title">Panel de Control</h1>
+    <p class="dashboard-subtitle">Bienvenido de vuelta, aquí está tu resumen</p>
+  </div>
+
+  <!-- Stats Cards Grid -->
+  <div class="stats-grid">
+    @for (stat of statsData; track stat.title) {
+      <app-stats-card
+        [title]="stat.title"
+        [value]="stat.value"
+        [icon]="stat.icon"
+        [color]="stat.color"
+        [trend]="stat.trend"
+        [trendDirection]="stat.trendDirection"
+        [subtitle]="stat.subtitle">
+      </app-stats-card>
+    }
+  </div>
+
+  <!-- Data Table Section -->
+  <div class="table-section">
+    <div class="table-section-header">
+      <h2 class="table-section-title">Usuarios Recientes</h2>
+      <p class="table-section-subtitle">Gestiona y visualiza los usuarios del sistema</p>
+    </div>
+
+    <app-table
+      [columns]="tableColumns"
+      [data]="tableData()"
+      [actions]="tableActions"
+      [loading]="isTableLoading()"
+      [hoverable]="true"
+      [striped]="true"
+      (rowClick)="onRowClick($event)"
+      (actionClick)="onActionClick($event)"
+      (sortChange)="onSortChange($event)">
+    </app-table>
+  </div>
+</div>

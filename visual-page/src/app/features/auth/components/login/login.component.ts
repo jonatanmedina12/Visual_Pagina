@@ -76,9 +76,9 @@ export class LoginComponent {
         this.isLoading.set(false);
         this.isSuccess.set(true);
 
-        // Navigate after success
+        // Navigate to dashboard after success
         setTimeout(() => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/dashboard']);
         }, 1000);
       }, 2000);
     } else {
