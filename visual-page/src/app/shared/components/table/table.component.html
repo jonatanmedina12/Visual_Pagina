@@ -1,0 +1,75 @@
+<div class="table-wrapper" [class.table-wrapper--loading]="loading()">
+
+  <!-- Loading Overlay -->
+  <div *ngIf="loading()" class="table-loading">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-container">
+    <table class="table" [class.table--hoverable]="hoverable()" [class.table--striped]="striped()">
+
+      <!-- Table Header -->
+      <thead class="table-header">
+        <tr>
+          @for (column of columns(); track column.key) {
+            <th
+              class="table-header-cell"
+              [class.table-header-cell--sortable]="column.sortable"
+              [style.width]="column.width"
+              (click)="onSort(column)">
+              <div class="table-header-content">
+                <span class="table-header-label">{{ column.label }}</span>
+                @if (column.sortable && sortColumn === column.key) {
+                  <mat-icon class="sort-icon">
+                    {{ sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+                  </mat-icon>
+                }
+              </div>
+            </th>
+          }
+          @if (hasActions()) {
+            <th class="table-header-cell table-header-cell--actions">Acciones</th>
+          }
+        </tr>
+      </thead>
+
+      <!-- Table Body -->
+      <tbody class="table-body">
+        @if (hasData()) {
+          @for (row of data(); track $index) {
+            <tr class="table-row" (click)="onRowClick(row)">
+              @for (column of columns(); track column.key) {
+                <td class="table-cell">{{ getCellValue(row, column.key) }}</td>
+              }
+              @if (hasActions()) {
+                <td class="table-cell table-cell--actions">
+                  <div class="table-actions">
+                    @for (action of actions(); track action.label) {
+                      <button
+                        mat-icon-button
+                        [color]="action.color || 'primary'"
+                        [matTooltip]="action.label"
+                        (click)="onActionClick(row, action, $event)">
+                        <mat-icon>{{ action.icon }}</mat-icon>
+                      </button>
+                    }
+                  </div>
+                </td>
+              }
+            </tr>
+          }
+        } @else {
+          <tr class="table-row--empty">
+            <td [attr.colspan]="columns().length + (hasActions() ? 1 : 0)" class="table-empty">
+              <div class="empty-state">
+                <mat-icon class="empty-icon">inbox</mat-icon>
+                <p class="empty-text">No hay datos disponibles</p>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

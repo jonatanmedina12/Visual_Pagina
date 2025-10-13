@@ -17,6 +17,11 @@ export const routes: Routes = [
       import('./features/auth/auth.routing').then((m) => m.routes),
   },
   {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./features/dashboard/dashboard.routing').then((m) => m.routes),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

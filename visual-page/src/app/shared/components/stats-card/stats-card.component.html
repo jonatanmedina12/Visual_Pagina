@@ -1,0 +1,29 @@
+<div class="stats-card" [class]="'stats-card--' + color()" [class.stats-card--loading]="loading()">
+
+  <!-- Loading Overlay -->
+  <div *ngIf="loading()" class="stats-card-loading">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Icon -->
+  <div class="stats-card-icon-wrapper">
+    <mat-icon class="stats-card-icon">{{ icon() }}</mat-icon>
+  </div>
+
+  <!-- Content -->
+  <div class="stats-card-content">
+    <div class="stats-card-header">
+      <p class="stats-card-title">{{ title() }}</p>
+
+      <!-- Trend Badge -->
+      <div *ngIf="trend() !== null" class="stats-card-trend" [class]="'stats-card-trend--' + trendDirection()">
+        <mat-icon class="trend-icon">{{ trendIcon() }}</mat-icon>
+        <span class="trend-text">{{ trendText() }}</span>
+      </div>
+    </div>
+
+    <h2 class="stats-card-value">{{ value() }}</h2>
+
+    <p *ngIf="subtitle()" class="stats-card-subtitle">{{ subtitle() }}</p>
+  </div>
+</div>
