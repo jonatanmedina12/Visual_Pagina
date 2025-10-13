@@ -1,0 +1,234 @@
+.app-button
+  --primary-bg: #404660
+  --primary-hover: #3A4059
+  --primary-active: #2B3044
+  --secondary-bg: #6c757d
+  --secondary-hover: #5a6268
+  --success-bg: #28a745
+  --success-hover: #218838
+  --danger-bg: #dc3545
+  --danger-hover: #c82333
+  --outline-border: #404660
+  --text-color: #ffffff
+  --disabled-bg: #cccccc
+  --disabled-text: #666666
+
+  position: relative
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  font-family: inherit
+  font-weight: 500
+  border: none
+  border-radius: 8px
+  cursor: pointer
+  overflow: hidden
+  transition: all 0.3s ease
+  -webkit-appearance: none
+  -webkit-tap-highlight-color: transparent
+  outline: none
+
+  &:focus-visible
+    outline: 2px solid var(--primary-bg)
+    outline-offset: 2px
+
+  // Contenido del bot�n
+  &__content
+    position: relative
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 8px
+    z-index: 1
+
+  &__text
+    white-space: nowrap
+
+  &__icon
+    display: flex
+    align-items: center
+    justify-content: center
+
+    &--left
+      margin-right: -4px
+
+    &--right
+      margin-left: -4px
+
+  // Spinner de carga
+  &__spinner
+    display: flex
+    align-items: center
+    justify-content: center
+
+    .spinner
+      width: 16px
+      height: 16px
+      border: 2px solid rgba(255, 255, 255, 0.3)
+      border-top-color: white
+      border-radius: 50%
+      animation: spin 0.6s linear infinite
+
+  // Check de éxito
+  &__success
+    display: flex
+    align-items: center
+    justify-content: center
+
+    .checkmark
+      width: 20px
+      height: 20px
+      border-radius: 50%
+      display: block
+      stroke-width: 3
+      stroke: #fff
+      stroke-miterlimit: 10
+      animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both
+
+      &__circle
+        stroke-dasharray: 166
+        stroke-dashoffset: 166
+        stroke-width: 3
+        stroke-miterlimit: 10
+        stroke: #fff
+        fill: none
+        animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards
+
+      &__check
+        transform-origin: 50% 50%
+        stroke-dasharray: 48
+        stroke-dashoffset: 48
+        animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
+
+  // Efecto ripple
+  &__ripple
+    position: absolute
+    top: 50%
+    left: 50%
+    width: 0
+    height: 0
+    border-radius: 50%
+    background: rgba(255, 255, 255, 0.4)
+    transform: translate(-50%, -50%)
+    transition: width 0.6s, height 0.6s
+    pointer-events: none
+
+  &:active &__ripple
+    width: 300px
+    height: 300px
+
+  // Tama�os
+  &--small
+    font-size: 12px
+    padding: 8px 16px
+    border-radius: 6px
+
+  &--medium
+    font-size: 14px
+    padding: 12px 24px
+    border-radius: 8px
+
+  &--large
+    font-size: 16px
+    padding: 16px 32px
+    border-radius: 10px
+
+  // Variantes
+  &--primary
+    background: var(--primary-bg)
+    color: var(--text-color)
+
+    &:hover:not(:disabled)
+      background: var(--primary-hover)
+      transform: translateY(-2px)
+      box-shadow: 0 4px 12px rgba(64, 70, 96, 0.3)
+
+    &:active:not(:disabled)
+      background: var(--primary-active)
+      transform: translateY(0)
+
+  &--secondary
+    background: var(--secondary-bg)
+    color: var(--text-color)
+
+    &:hover:not(:disabled)
+      background: var(--secondary-hover)
+      transform: translateY(-2px)
+      box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3)
+
+    &:active:not(:disabled)
+      transform: translateY(0)
+
+  &--success
+    background: var(--success-bg)
+    color: var(--text-color)
+
+    &:hover:not(:disabled)
+      background: var(--success-hover)
+      transform: translateY(-2px)
+      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3)
+
+    &:active:not(:disabled)
+      transform: translateY(0)
+
+  &--danger
+    background: var(--danger-bg)
+    color: var(--text-color)
+
+    &:hover:not(:disabled)
+      background: var(--danger-hover)
+      transform: translateY(-2px)
+      box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3)
+
+    &:active:not(:disabled)
+      transform: translateY(0)
+
+  &--outline
+    background: transparent
+    color: var(--outline-border)
+    border: 2px solid var(--outline-border)
+
+    &:hover:not(:disabled)
+      background: var(--outline-border)
+      color: var(--text-color)
+      transform: translateY(-2px)
+      box-shadow: 0 4px 12px rgba(64, 70, 96, 0.2)
+
+    &:active:not(:disabled)
+      transform: translateY(0)
+
+  // Estados
+  &--disabled,
+  &:disabled
+    background: var(--disabled-bg) !important
+    color: var(--disabled-text) !important
+    cursor: not-allowed
+    transform: none !important
+    box-shadow: none !important
+    border-color: var(--disabled-bg) !important
+
+  &--loading
+    cursor: wait
+    pointer-events: none
+
+    .app-button__text
+      opacity: 0.6
+
+// Animaciones
+@keyframes spin
+  to
+    transform: rotate(360deg)
+
+@keyframes stroke
+  100%
+    stroke-dashoffset: 0
+
+@keyframes scale
+  0%, 100%
+    transform: none
+  50%
+    transform: scale3d(1.1, 1.1, 1)
+
+@keyframes fill
+  100%
+    box-shadow: inset 0px 0px 0px 30px #28a745

@@ -22,7 +22,7 @@
         </a>
       }
 
-      <button mat-raised-button color="accent" class="cta-button">
+      <button mat-raised-button color="accent" class="cta-button" (click)="navigateToLogin()">
         <mat-icon>rocket_launch</mat-icon>
         Comenzar
       </button>
@@ -60,7 +60,7 @@
       mat-raised-button
       color="accent"
       class="mobile-cta-button"
-      (click)="closeMenu()"
+      (click)="navigateToLogin()"
     >
       <mat-icon>rocket_launch</mat-icon>
       Comenzar

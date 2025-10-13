@@ -1,0 +1,37 @@
+<button
+  [type]="type()"
+  [class]="'app-button app-button--' + variant() + ' app-button--' + size()"
+  [class.app-button--disabled]="disabled()"
+  [class.app-button--loading]="loading()"
+  [disabled]="disabled() || loading()"
+  (click)="onClick()">
+
+  <div class="app-button__content">
+    <!-- Spinner de carga -->
+    <span class="app-button__spinner" *ngIf="loading() && !success()">
+      <span class="spinner"></span>
+    </span>
+
+    <!-- Check de éxito -->
+    <span class="app-button__success" *ngIf="success()">
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+      </svg>
+    </span>
+
+    <!-- Ícono izquierdo -->
+    <i *ngIf="icon() && iconPosition() === 'left' && !loading() && !success()"
+       [class]="icon() + ' app-button__icon app-button__icon--left'"></i>
+
+    <!-- Texto del botón -->
+    <span class="app-button__text">{{ label() }}</span>
+
+    <!-- Ícono derecho -->
+    <i *ngIf="icon() && iconPosition() === 'right' && !loading() && !success()"
+       [class]="icon() + ' app-button__icon app-button__icon--right'"></i>
+  </div>
+
+  <!-- Efecto de onda al hacer clic -->
+  <span class="app-button__ripple"></span>
+</button>

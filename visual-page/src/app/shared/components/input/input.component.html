@@ -1,0 +1,56 @@
+<div class="input-container" 
+     [class]="'input-container--' + size()"
+     [class.input-container--focused]="isFocused()"
+     [class.input-container--error]="error()"
+     [class.input-container--success]="success()"
+     [class.input-container--disabled]="disabled()">
+
+  <!-- Label -->
+  <label *ngIf="label()" class="input-label">
+    {{ label() }}
+    <span *ngIf="required()" class="input-required">*</span>
+  </label>
+
+  <!-- Input Field -->
+  <div class="input-field">
+    <!-- Left Icon -->
+    <mat-icon *ngIf="icon() && iconPosition() === 'left'" 
+              class="input-icon input-icon--left"
+              (click)="onIconClick()">
+      {{ icon() }}
+    </mat-icon>
+
+    <!-- Input Element -->
+    <input 
+      class="input-element"
+      [type]="actualInputType"
+      [placeholder]="placeholder()"
+      [disabled]="disabled()"
+      [attr.maxlength]="maxLength()"
+      [attr.minlength]="minLength()"
+      [value]="currentValue()"
+      (input)="onInputChange($event)"
+      (focus)="onInputFocus()"
+      (blur)="onInputBlur()">
+
+    <!-- Right Icon or Password Toggle -->
+    <mat-icon *ngIf="isPasswordType || (icon() && iconPosition() === 'right')" 
+              class="input-icon input-icon--right"
+              [class.input-icon--clickable]="isPasswordType"
+              (click)="onIconClick()">
+      {{ isPasswordType ? passwordToggleIcon : icon() }}
+    </mat-icon>
+
+    <!-- Success Check Icon -->
+    <mat-icon *ngIf="success() && !isPasswordType && !icon()" 
+              class="input-icon input-icon--right input-icon--success">
+      check_circle
+    </mat-icon>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error()" class="input-error">
+    <mat-icon class="input-error-icon">error</mat-icon>
+    <span class="input-error-text">{{ error() }}</span>
+  </div>
+</div>

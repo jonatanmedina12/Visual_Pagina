@@ -7,19 +7,7 @@
         <h1 class="hero-title">{{ title() }}</h1>
         <p class="hero-subtitle">{{ subtitle() }}</p>
 
-        @if (showButtons()) {
-          <div class="hero-actions">
-            <a [routerLink]="primaryButtonRoute()" mat-raised-button color="accent" class="primary-button">
-              <mat-icon>rocket_launch</mat-icon>
-              {{ primaryButtonText() }}
-            </a>
-
-            <a [routerLink]="secondaryButtonRoute()" mat-stroked-button class="secondary-button">
-              <mat-icon>play_circle</mat-icon>
-              {{ secondaryButtonText() }}
-            </a>
-          </div>
-        }
+    
       </div>
 
       <!-- Decorative Elements -->
