@@ -1,0 +1,129 @@
+.register-container
+  min-height: calc(100vh - 64px)
+  display: flex
+  align-items: center
+  justify-content: center
+  padding: 40px 20px
+  background: linear-gradient(135deg, #1a365d 0%, #0a1f3f 100%)
+  position: relative
+  overflow: hidden
+
+  &::before
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: radial-gradient(circle at 70% 30%, rgba(217, 119, 6, 0.1) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(217, 119, 6, 0.08) 0%, transparent 50%)
+    pointer-events: none
+
+.register-card
+  background: rgba(255, 255, 255, 0.95)
+  backdrop-filter: blur(20px)
+  border-radius: 24px
+  padding: 48px
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1)
+  width: 100%
+  max-width: 600px
+  position: relative
+  z-index: 1
+  overflow: hidden
+
+.register-header
+  text-align: center
+  margin-bottom: 40px
+
+.register-title
+  font-size: 2.5rem
+  font-weight: 700
+  color: #1a365d
+  margin: 0 0 12px 0
+  letter-spacing: -0.5px
+
+.register-subtitle
+  font-size: 1.125rem
+  color: #64748b
+  margin: 0
+  font-weight: 400
+
+.register-form
+  display: flex
+  flex-direction: column
+  gap: 20px
+
+.name-row
+  display: flex
+  gap: 16px
+  width: 100%
+
+  app-input
+    flex: 1
+    min-width: 0
+
+  ::ng-deep .input-container
+    width: 100%
+
+.register-actions
+  margin-top: 16px
+
+  ::ng-deep .app-button
+    width: 100%
+    height: 56px
+    font-size: 1.1rem
+    font-weight: 600
+    border-radius: 12px
+    transition: all 0.3s ease
+
+    &:hover
+      transform: translateY(-2px)
+      box-shadow: 0 8px 25px rgba(217, 119, 6, 0.4)
+
+.register-options
+  display: flex
+  flex-direction: column
+  gap: 16px
+  margin-top: 32px
+  text-align: center
+
+.login-link
+  color: #64748b
+  font-size: 0.95rem
+
+  a
+    color: #d97706
+    text-decoration: none
+    font-weight: 600
+    transition: color 0.3s ease
+
+    &:hover
+      color: #b45309
+      text-decoration: underline
+
+// Responsive Design
+@media (max-width: 768px)
+  .register-container
+    padding: 20px
+    min-height: 100vh
+
+  .register-card
+    padding: 32px 24px
+    border-radius: 20px
+    max-width: 100%
+
+  .register-title
+    font-size: 2rem
+
+  .register-subtitle
+    font-size: 1rem
+
+  .name-row
+    flex-direction: column
+    gap: 24px
+
+@media (max-width: 480px)
+  .register-card
+    padding: 24px 20px
+
+  .register-title
+    font-size: 1.75rem

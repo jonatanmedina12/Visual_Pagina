@@ -1,0 +1,97 @@
+<div class="register-container" appScrollAnimation animationType="fade-in">
+  <div class="register-card" appScrollAnimation animationType="slide-up" [animationDelay]="200">
+    <div class="register-header">
+      <h2 class="register-title">Crear Cuenta</h2>
+      <p class="register-subtitle">Únete a nosotros hoy</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <!-- Name Fields Row -->
+      <div class="name-row">
+        <!-- First Name Field -->
+        <app-input
+          [label]="'Nombre'"
+          [type]="'text'"
+          [placeholder]="'Tu nombre'"
+          [icon]="'person'"
+          [iconPosition]="'right'"
+          [size]="'large'"
+          [required]="true"
+          [error]="getFirstNameError()"
+          [minLength]="2"
+          formControlName="firstName">
+        </app-input>
+
+        <!-- Last Name Field -->
+        <app-input
+          [label]="'Apellido'"
+          [type]="'text'"
+          [placeholder]="'Tu apellido'"
+          [icon]="'person_outline'"
+          [iconPosition]="'right'"
+          [size]="'large'"
+          [required]="true"
+          [error]="getLastNameError()"
+          [minLength]="2"
+          formControlName="lastName">
+        </app-input>
+      </div>
+
+      <!-- Email Field -->
+      <app-input
+        [label]="'Correo electrónico'"
+        [type]="'email'"
+        [placeholder]="'tu@ejemplo.com'"
+        [icon]="'email'"
+        [iconPosition]="'right'"
+        [size]="'large'"
+        [required]="true"
+        [error]="getEmailError()"
+        formControlName="email">
+      </app-input>
+
+      <!-- Password Field -->
+      <app-input
+        [label]="'Contraseña'"
+        [type]="'password'"
+        [placeholder]="'Mínimo 8 caracteres'"
+        [size]="'large'"
+        [required]="true"
+        [error]="getPasswordError()"
+        [minLength]="8"
+        formControlName="password">
+      </app-input>
+
+      <!-- Confirm Password Field -->
+      <app-input
+        [label]="'Confirmar contraseña'"
+        [type]="'password'"
+        [placeholder]="'Repite tu contraseña'"
+        [size]="'large'"
+        [required]="true"
+        [error]="getConfirmPasswordError()"
+        formControlName="confirmPassword">
+      </app-input>
+
+      <!-- Register Button -->
+      <div class="register-actions">
+        <app-button
+          [label]="isSuccess() ? '¡Cuenta Creada!' : (isLoading() ? 'Creando cuenta...' : 'Crear Cuenta')"
+          variant="primary"
+          size="large"
+          [loading]="isLoading()"
+          [success]="isSuccess()"
+          [disabled]="!registerForm.valid"
+          (buttonClick)="onSubmit()">
+        </app-button>
+      </div>
+
+      <!-- Additional Options -->
+      <div class="register-options" appScrollAnimation animationType="fade-in" [animationDelay]="400">
+        <div class="login-link">
+          ¿Ya tienes cuenta? <a href="/auth/login">Inicia sesión</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

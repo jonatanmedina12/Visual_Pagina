@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -28,6 +28,8 @@ interface NavItem {
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent {
+  private router = inject(Router);
+  
   protected readonly isMenuOpen = signal(false);
   protected readonly isScrolled = signal(false);
 
@@ -53,5 +55,10 @@ export class HeaderComponent {
 
   closeMenu() {
     this.isMenuOpen.set(false);
+  }
+
+  navigateToLogin() {
+    this.router.navigate(['/auth/login']);
+    this.closeMenu();
   }
 }

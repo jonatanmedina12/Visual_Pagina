@@ -1,0 +1,175 @@
+// Variables
+$primary-color: #d97706
+$error-color: #ef4444
+$success-color: #10b981
+$text-primary: #1a365d
+$text-secondary: #64748b
+$text-muted: #94a3b8
+$border-color: #e2e8f0
+$border-focused: $primary-color
+$bg-white: #ffffff
+$bg-disabled: #f8fafc
+
+.input-container
+  display: flex
+  flex-direction: column
+  gap: 8px
+  width: 100%
+
+  &--small
+    .input-field
+      height: 40px
+    .input-element
+      font-size: 0.875rem
+    .input-label
+      font-size: 0.875rem
+
+  &--medium
+    .input-field
+      height: 48px
+    .input-element
+      font-size: 1rem
+    .input-label
+      font-size: 0.95rem
+
+  &--large
+    .input-field
+      height: 56px
+    .input-element
+      font-size: 1.1rem
+    .input-label
+      font-size: 1rem
+
+  &--focused
+    .input-field
+      border-color: $border-focused
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1)
+
+  &--error
+    .input-field
+      border-color: $error-color
+      
+    .input-label
+      color: $error-color
+
+  &--success
+    .input-field
+      border-color: $success-color
+
+  &--disabled
+    .input-field
+      background-color: $bg-disabled
+      border-color: darken($border-color, 10%)
+      
+    .input-element
+      color: $text-muted
+      cursor: not-allowed
+      
+    .input-label
+      color: $text-muted
+
+.input-label
+  font-weight: 600
+  color: $text-primary
+  margin-bottom: 4px
+  transition: color 0.2s ease
+
+.input-required
+  color: $error-color
+  margin-left: 2px
+
+.input-field
+  display: flex
+  align-items: center
+  background-color: $bg-white
+  border: 2px solid $border-color
+  border-radius: 12px
+  padding: 0 16px
+  transition: all 0.3s ease
+  position: relative
+
+  &:hover:not(.input-container--disabled &)
+    border-color: darken($border-color, 15%)
+
+.input-element
+  flex: 1
+  border: none
+  outline: none
+  background: transparent
+  color: $text-primary
+  font-weight: 500
+  height: 100%
+  padding: 0
+  
+  &::placeholder
+    color: $text-muted
+    font-weight: 400
+
+  &:disabled
+    background: transparent
+
+.input-icon
+  display: flex
+  align-items: center
+  justify-content: center
+  color: $text-secondary
+  font-size: 20px
+  width: 20px
+  height: 20px
+  transition: color 0.3s ease
+  user-select: none
+
+  &--left
+    margin-right: 12px
+
+  &--right
+    margin-left: 12px
+
+  &--clickable
+    cursor: pointer
+    
+    &:hover
+      color: $primary-color
+
+  &--success
+    color: $success-color
+
+.input-error
+  display: flex
+  align-items: center
+  gap: 6px
+  color: $error-color
+  font-size: 0.875rem
+  font-weight: 500
+
+.input-error-icon
+  font-size: 16px
+  width: 16px
+  height: 16px
+
+.input-error-text
+  line-height: 1.2
+
+// Focus states
+.input-element:focus + .input-icon--right
+  color: $primary-color
+
+// Animation for icons
+.input-icon
+  transition: all 0.2s ease
+
+// Responsive adjustments
+@media (max-width: 768px)
+  .input-container--large
+    .input-field
+      height: 52px
+    .input-element
+      font-size: 1rem
+
+@media (max-width: 480px)
+  .input-container
+    &--medium, &--large
+      .input-field
+        height: 44px
+      .input-element
+        font-size: 0.95rem
