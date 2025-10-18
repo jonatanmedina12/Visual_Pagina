@@ -106,6 +106,55 @@
       transform: translateY(-2px)
       box-shadow: 0 4px 16px rgba(217, 119, 6, 0.4)
 
+  .user-menu-button
+    margin-left: 16px
+
+    .user-avatar
+      font-size: 32px
+      width: 32px
+      height: 32px
+      color: white
+
+// User Menu Styles
+::ng-deep .user-menu
+  margin-top: 8px
+  border-radius: 12px
+
+  .user-menu-header
+    display: flex
+    align-items: center
+    gap: 12px
+    padding: 16px 20px
+    background: linear-gradient(135deg, #1a365d 0%, #0a1f3f 100%)
+    color: white
+    border-radius: 12px 12px 0 0
+
+    mat-icon
+      font-size: 48px
+      width: 48px
+      height: 48px
+
+    .user-info
+      display: flex
+      flex-direction: column
+      gap: 4px
+
+      .user-name
+        font-weight: 600
+        font-size: 1rem
+
+      .user-email
+        font-size: 0.875rem
+        opacity: 0.9
+
+  .mat-mdc-menu-item
+    min-height: 48px
+    font-size: 0.95rem
+
+    mat-icon
+      margin-right: 12px
+      color: #64748b
+
 .mobile-menu-button
   display: none
   color: white
@@ -158,6 +207,45 @@
         font-weight: 600
 
     .mobile-cta-button
+      margin-top: 16px
+      width: 100%
+      padding: 14px
+      font-weight: 600
+      display: flex
+      align-items: center
+      justify-content: center
+      gap: 8px
+
+    .mobile-user-header
+      display: flex
+      align-items: center
+      gap: 16px
+      padding: 16px
+      background: linear-gradient(135deg, #1a365d 0%, #0a1f3f 100%)
+      border-radius: 12px
+      margin-bottom: 16px
+
+      .mobile-user-avatar
+        font-size: 56px
+        width: 56px
+        height: 56px
+        color: white
+
+      .mobile-user-info
+        display: flex
+        flex-direction: column
+        gap: 4px
+
+        .mobile-user-name
+          font-weight: 700
+          font-size: 1.1rem
+          color: white
+
+        .mobile-user-email
+          font-size: 0.875rem
+          color: rgba(255, 255, 255, 0.85)
+
+    .mobile-logout-button
       margin-top: 16px
       width: 100%
       padding: 14px
