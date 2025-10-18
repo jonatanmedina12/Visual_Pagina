@@ -10,7 +10,7 @@
 
     <!-- Desktop Navigation -->
     <nav class="desktop-nav">
-      @for (item of navItems(); track item.route) {
+      @for (item of currentNavItems; track item.route) {
         <a
           [routerLink]="item.route"
           routerLinkActive="active"
@@ -22,10 +22,41 @@
         </a>
       }
 
-      <button mat-raised-button color="accent" class="cta-button" (click)="navigateToLogin()">
-        <mat-icon>rocket_launch</mat-icon>
-        Comenzar
-      </button>
+      <!-- Show "Comenzar" button only when NOT authenticated -->
+      @if (!isAuthenticated()) {
+        <button mat-raised-button color="accent" class="cta-button" (click)="navigateToLogin()">
+          <mat-icon>rocket_launch</mat-icon>
+          Comenzar
+        </button>
+      }
+
+      <!-- Show user menu only when authenticated -->
+      @if (isAuthenticated()) {
+        <button mat-icon-button [matMenuTriggerFor]="userMenu" class="user-menu-button">
+          <mat-icon class="user-avatar">account_circle</mat-icon>
+        </button>
+        <mat-menu #userMenu="matMenu" class="user-menu">
+          <div class="user-menu-header">
+            <mat-icon>account_circle</mat-icon>
+            <div class="user-info">
+              <span class="user-name">Usuario</span>
+              <span class="user-email">usuario@ejemplo.com</span>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          @for (item of userMenuItems(); track item.route) {
+            <button mat-menu-item [routerLink]="item.route">
+              <mat-icon>{{ item.icon }}</mat-icon>
+              <span>{{ item.label }}</span>
+            </button>
+          }
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Cerrar Sesión</span>
+          </button>
+        </mat-menu>
+      }
     </nav>
 
     <!-- Mobile Menu Button -->
@@ -43,7 +74,19 @@
 <!-- Mobile Navigation Drawer -->
 <div class="mobile-drawer" [class.open]="isMenuOpen()">
   <div class="mobile-menu-content">
-    @for (item of navItems(); track item.route) {
+    <!-- User info for authenticated users (mobile) -->
+    @if (isAuthenticated()) {
+      <div class="mobile-user-header">
+        <mat-icon class="mobile-user-avatar">account_circle</mat-icon>
+        <div class="mobile-user-info">
+          <span class="mobile-user-name">Usuario</span>
+          <span class="mobile-user-email">usuario@ejemplo.com</span>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    }
+
+    @for (item of currentNavItems; track item.route) {
       <a
         [routerLink]="item.route"
         routerLinkActive="active"
@@ -56,15 +99,43 @@
       </a>
     }
 
-    <button
-      mat-raised-button
-      color="accent"
-      class="mobile-cta-button"
-      (click)="navigateToLogin()"
-    >
-      <mat-icon>rocket_launch</mat-icon>
-      Comenzar
-    </button>
+    <!-- Show user menu items when authenticated -->
+    @if (isAuthenticated()) {
+      <mat-divider></mat-divider>
+      @for (item of userMenuItems(); track item.route) {
+        <a
+          [routerLink]="item.route"
+          mat-button
+          class="mobile-nav-link"
+          (click)="closeMenu()"
+        >
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <span>{{ item.label }}</span>
+        </a>
+      }
+      <button
+        mat-raised-button
+        color="warn"
+        class="mobile-logout-button"
+        (click)="logout()"
+      >
+        <mat-icon>logout</mat-icon>
+        Cerrar Sesión
+      </button>
+    }
+
+    <!-- Show "Comenzar" button only when NOT authenticated -->
+    @if (!isAuthenticated()) {
+      <button
+        mat-raised-button
+        color="accent"
+        class="mobile-cta-button"
+        (click)="navigateToLogin()"
+      >
+        <mat-icon>rocket_launch</mat-icon>
+        Comenzar
+      </button>
+    }
   </div>
 </div>
 
