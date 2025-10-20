@@ -35,6 +35,48 @@ $spacing-base: 24px
   margin-bottom: 48px
   animation: fadeInUp 0.6s ease-out 0.2s both
 
+// Content Grid (Messages + Table)
+.content-grid
+  display: grid
+  grid-template-columns: 1fr 2fr
+  gap: $spacing-base
+  margin-bottom: 32px
+  animation: fadeInUp 0.6s ease-out 0.4s both
+
+// Messages Section
+.messages-section
+  background: white
+  border-radius: 16px
+  padding: 24px
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)
+  border: 1px solid #e2e8f0
+  display: flex
+  flex-direction: column
+
+.messages-container
+  display: flex
+  flex-direction: column
+  gap: 12px
+  flex: 1
+
+.empty-messages
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  padding: 3rem 1rem
+  color: #999
+  text-align: center
+
+  .material-icons
+    font-size: 3rem
+    margin-bottom: 1rem
+    opacity: 0.5
+
+  p
+    margin: 0
+    font-size: 0.9rem
+
 // Table Section
 .table-section
   background: white
@@ -42,8 +84,63 @@ $spacing-base: 24px
   padding: 32px
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)
   border: 1px solid #e2e8f0
-  animation: fadeInUp 0.6s ease-out 0.4s both
 
+// Section Headers
+.section-header
+  display: flex
+  justify-content: space-between
+  align-items: center
+  margin-bottom: 20px
+  padding-bottom: 16px
+  border-bottom: 1px solid #e2e8f0
+
+.section-header-content
+  display: flex
+  align-items: center
+  gap: 12px
+
+.section-title
+  font-size: 1.25rem
+  font-weight: 700
+  color: $text-primary
+  margin: 0
+
+.section-subtitle
+  font-size: 0.875rem
+  color: $text-muted
+  margin: 4px 0 0 0
+
+.unread-badge
+  background: #2196f3
+  color: white
+  padding: 0.25rem 0.5rem
+  border-radius: 12px
+  font-size: 0.75rem
+  font-weight: 600
+
+.view-all-btn
+  display: flex
+  align-items: center
+  gap: 0.25rem
+  padding: 0.5rem 1rem
+  background: transparent
+  border: 1px solid #e2e8f0
+  border-radius: 8px
+  color: $text-secondary
+  font-size: 0.875rem
+  font-weight: 500
+  cursor: pointer
+  transition: all 0.3s ease
+
+  &:hover
+    background: #f8f9fa
+    border-color: #2196f3
+    color: #2196f3
+
+  .material-icons
+    font-size: 1.125rem
+
+// Legacy (for backward compatibility)
 .table-section-header
   margin-bottom: 24px
 
@@ -80,6 +177,9 @@ $spacing-base: 24px
   .stats-grid
     grid-template-columns: repeat(2, 1fr)
 
+  .content-grid
+    grid-template-columns: 1fr
+
 @media (max-width: 768px)
   .dashboard-content
     padding: 0
@@ -98,9 +198,19 @@ $spacing-base: 24px
     gap: 16px
     margin-bottom: 32px
 
+  .content-grid
+    gap: 16px
+
+  .messages-section,
   .table-section
     padding: 20px
     border-radius: 12px
+
+  .section-title
+    font-size: 1.125rem
+
+  .section-subtitle
+    font-size: 0.8rem
 
   .table-section-title
     font-size: 1.25rem
@@ -119,6 +229,18 @@ $spacing-base: 24px
     gap: 12px
     margin-bottom: 24px
 
+  .content-grid
+    gap: 12px
+
+  .messages-section,
   .table-section
     padding: 16px
     border-radius: 8px
+
+  .section-header
+    flex-direction: column
+    align-items: flex-start
+    gap: 12px
+
+  .view-all-btn
+    align-self: stretch

@@ -1,0 +1,17 @@
+<div class="messages-page">
+  <app-header></app-header>
+
+  <div class="page-layout">
+    <app-sidebar></app-sidebar>
+
+    <main class="main-content">
+      <div class="messages-container">
+        <app-messages-list
+          [messages]="messages()"
+          [loading]="isLoading()"
+          (messageClick)="onMessageClick($event)">
+        </app-messages-list>
+      </div>
+    </main>
+  </div>
+</div>

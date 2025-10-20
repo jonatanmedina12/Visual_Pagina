@@ -1,6 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject, computed } from '@angular/core';
 import { StatsCardComponent } from '../../../../shared/components/stats-card/stats-card.component';
 import { TableComponent, TableColumn, TableAction } from '../../../../shared/components/table/table.component';
+import { MessageCardComponent, Message } from '../../../messages/components/message-card/message-card.component';
+import { MessagesService } from '../../../messages/services/messages.service';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 interface StatsData {
   title: string;
@@ -23,11 +27,20 @@ interface UserData {
 
 @Component({
   selector: 'app-dashboard-content',
-  imports: [StatsCardComponent, TableComponent],
+  imports: [CommonModule, StatsCardComponent, TableComponent, MessageCardComponent],
   templateUrl: './dashboard-content.component.html',
   styleUrls: ['./dashboard-content.component.sass']
 })
 export class DashboardContentComponent {
+  private messagesService = inject(MessagesService);
+  private router = inject(Router);
+
+  // Recent messages (limited to 3)
+  protected readonly recentMessages = computed(() =>
+    this.messagesService.allMessages().slice(0, 3)
+  );
+
+  protected readonly unreadMessagesCount = this.messagesService.unreadCount;
   // Stats Cards Data
   protected readonly statsData: StatsData[] = [
     {
@@ -186,5 +199,17 @@ export class DashboardContentComponent {
     });
 
     this.tableData.set(sorted);
+  }
+
+  // Message handlers
+  onMessageClick(message: Message): void {
+    console.log('Message clicked:', message);
+    this.messagesService.markAsRead(message.id);
+    // Navegar a la página de mensajes
+    this.router.navigate(['/messages']);
+  }
+
+  viewAllMessages(): void {
+    this.router.navigate(['/messages']);
   }
 }

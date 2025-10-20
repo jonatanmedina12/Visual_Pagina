@@ -1,0 +1,88 @@
+<div class="messages-list-container">
+  <!-- Header with search and filters -->
+  <div class="messages-header">
+    <div class="header-title">
+      <h2>Mensajes</h2>
+      @if (unreadCount() > 0) {
+        <span class="unread-count-badge">{{ unreadCount() }}</span>
+      }
+    </div>
+
+    <div class="messages-controls">
+      <!-- Search bar -->
+      <div class="search-box">
+        <i class="material-icons">search</i>
+        <input
+          type="text"
+          placeholder="Buscar mensajes..."
+          [value]="searchTerm()"
+          (input)="onSearchChange($event)"
+          class="search-input">
+      </div>
+
+      <!-- Filter buttons -->
+      <div class="filter-buttons">
+        <button
+          class="filter-btn"
+          [class.active]="selectedFilter() === 'all'"
+          (click)="onFilterChange('all')">
+          Todos
+        </button>
+        <button
+          class="filter-btn"
+          [class.active]="selectedFilter() === 'unread'"
+          (click)="onFilterChange('unread')">
+          No leídos
+        </button>
+        <button
+          class="filter-btn"
+          [class.active]="selectedFilter() === 'read'"
+          (click)="onFilterChange('read')">
+          Leídos
+        </button>
+      </div>
+
+      <!-- Priority filter -->
+      <div class="priority-filter">
+        <select
+          class="priority-select"
+          [value]="selectedPriority()"
+          (change)="onPriorityChange($event)">
+          <option value="all">Todas las prioridades</option>
+          <option value="high">Alta prioridad</option>
+          <option value="normal">Normal</option>
+          <option value="low">Baja prioridad</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Messages list -->
+  <div class="messages-list">
+    @if (loading) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Cargando mensajes...</p>
+      </div>
+    } @else if (filteredMessages().length === 0) {
+      <div class="empty-state">
+        <i class="material-icons">inbox</i>
+        <h3>No hay mensajes</h3>
+        <p>
+          @if (searchTerm() || selectedFilter() !== 'all' || selectedPriority() !== 'all') {
+            No se encontraron mensajes con los filtros aplicados
+          } @else {
+            No tienes mensajes en este momento
+          }
+        </p>
+      </div>
+    } @else {
+      @for (message of filteredMessages(); track message.id) {
+        <app-message-card
+          [message]="message"
+          (messageClick)="onMessageClick($event)">
+        </app-message-card>
+      }
+    }
+  </div>
+</div>

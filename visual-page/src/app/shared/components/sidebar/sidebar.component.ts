@@ -1,9 +1,10 @@
-import { Component, signal, effect } from '@angular/core';
+import { Component, signal, effect, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MessagesService } from '../../../features/messages/services/messages.service';
 
 interface SubMenuItem {
   label: string;
@@ -26,8 +27,16 @@ interface MenuItem {
   styleUrls: ['./sidebar.component.sass'],
 })
 export class SidebarComponent {
+  private messagesService = inject(MessagesService);
+
   protected readonly isCollapsed = signal(false);
   protected readonly expandedItem = signal<string | null>(null);
+
+  // Computed badge for messages with dynamic count
+  protected readonly messagesBadge = computed(() => {
+    const count = this.messagesService.unreadCount();
+    return count > 0 ? count.toString() : undefined;
+  });
 
   constructor() {
     // Update body class when sidebar state changes
@@ -42,7 +51,7 @@ export class SidebarComponent {
     });
   }
 
-  protected readonly menuItems = signal<MenuItem[]>([
+  protected readonly menuItems = computed<MenuItem[]>(() => [
     {
       label: 'Dashboard',
       icon: 'dashboard',
@@ -82,7 +91,7 @@ export class SidebarComponent {
       label: 'Messages',
       icon: 'mail',
       route: '/messages',
-      badge: '8',
+      badge: this.messagesBadge(),
     },
     {
       label: 'Calendar',
