@@ -20,23 +20,60 @@
     }
   </div>
 
-  <!-- Data Table Section -->
-  <div class="table-section">
-    <div class="table-section-header">
-      <h2 class="table-section-title">Usuarios Recientes</h2>
-      <p class="table-section-subtitle">Gestiona y visualiza los usuarios del sistema</p>
+  <!-- Two Column Layout for Messages and Table -->
+  <div class="content-grid">
+    <!-- Recent Messages Section -->
+    <div class="messages-section">
+      <div class="section-header">
+        <div class="section-header-content">
+          <h2 class="section-title">Mensajes Recientes</h2>
+          @if (unreadMessagesCount() > 0) {
+            <span class="unread-badge">{{ unreadMessagesCount() }}</span>
+          }
+        </div>
+        <button class="view-all-btn" (click)="viewAllMessages()">
+          Ver todos
+          <i class="material-icons">arrow_forward</i>
+        </button>
+      </div>
+
+      <div class="messages-container">
+        @if (recentMessages().length > 0) {
+          @for (message of recentMessages(); track message.id) {
+            <app-message-card
+              [message]="message"
+              (messageClick)="onMessageClick($event)">
+            </app-message-card>
+          }
+        } @else {
+          <div class="empty-messages">
+            <i class="material-icons">inbox</i>
+            <p>No hay mensajes recientes</p>
+          </div>
+        }
+      </div>
     </div>
 
-    <app-table
-      [columns]="tableColumns"
-      [data]="tableData()"
-      [actions]="tableActions"
-      [loading]="isTableLoading()"
-      [hoverable]="true"
-      [striped]="true"
-      (rowClick)="onRowClick($event)"
-      (actionClick)="onActionClick($event)"
-      (sortChange)="onSortChange($event)">
-    </app-table>
+    <!-- Data Table Section -->
+    <div class="table-section">
+      <div class="section-header">
+        <div class="section-header-content">
+          <h2 class="section-title">Usuarios Recientes</h2>
+          <p class="section-subtitle">Gestiona y visualiza los usuarios del sistema</p>
+        </div>
+      </div>
+
+      <app-table
+        [columns]="tableColumns"
+        [data]="tableData()"
+        [actions]="tableActions"
+        [loading]="isTableLoading()"
+        [hoverable]="true"
+        [striped]="true"
+        (rowClick)="onRowClick($event)"
+        (actionClick)="onActionClick($event)"
+        (sortChange)="onSortChange($event)">
+      </app-table>
+    </div>
   </div>
 </div>

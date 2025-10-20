@@ -22,6 +22,11 @@ export const routes: Routes = [
       import('./features/dashboard/dashboard.routing').then((m) => m.routes),
   },
   {
+    path: 'messages',
+    loadChildren: () =>
+      import('./features/messages/messages.routing').then((m) => m.routes),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },
