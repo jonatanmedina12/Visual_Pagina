@@ -1,0 +1,74 @@
+<div class="event-card"
+     [class.past]="isPast()"
+     [class.today]="isToday()"
+     [class]="getTypeClass()"
+     [class]="getPriorityClass()"
+     (click)="onEventClick()">
+  <div class="event-indicator">
+    <div class="event-icon">
+      @if (event.type === 'meeting') {
+        <i class="material-icons">groups</i>
+      } @else if (event.type === 'presentation') {
+        <i class="material-icons">presentation</i>
+      } @else if (event.type === 'deadline') {
+        <i class="material-icons">flag</i>
+      } @else if (event.type === 'training') {
+        <i class="material-icons">school</i>
+      } @else if (event.type === 'maintenance') {
+        <i class="material-icons">build</i>
+      } @else {
+        <i class="material-icons">event</i>
+      }
+    </div>
+  </div>
+
+  <div class="event-content">
+    <div class="event-header">
+      <div class="event-info">
+        <span class="event-title">{{ event.title }}</span>
+        @if (isToday()) {
+          <span class="today-badge">Hoy</span>
+        }
+      </div>
+      <span class="event-time">{{ getTimeRange() }}</span>
+    </div>
+
+    @if (event.description) {
+      <div class="event-description">{{ event.description }}</div>
+    }
+
+    <div class="event-details">
+      <div class="detail-item">
+        <i class="material-icons">calendar_today</i>
+        <span>{{ getEventDate() }}</span>
+      </div>
+
+      @if (event.location) {
+        <div class="detail-item">
+          <i class="material-icons">place</i>
+          <span>{{ event.location }}</span>
+        </div>
+      }
+
+      <div class="detail-item">
+        <i class="material-icons">schedule</i>
+        <span>{{ getDuration() }}</span>
+      </div>
+    </div>
+
+    <div class="event-footer">
+      @if (event.attendees && event.attendees.length > 0) {
+        <div class="attendees">
+          <i class="material-icons">people</i>
+          <span>{{ event.attendees.length }} asistente{{ event.attendees.length !== 1 ? 's' : '' }}</span>
+        </div>
+      }
+      @if (event.priority === 'high') {
+        <span class="priority-badge">
+          <i class="material-icons">priority_high</i>
+          Alta prioridad
+        </span>
+      }
+    </div>
+  </div>
+</div>

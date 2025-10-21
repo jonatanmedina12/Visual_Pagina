@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MessagesService } from '../../../features/messages/services/messages.service';
+import { CalendarService } from '../../../features/calendar/services/calendar.service';
 
 interface SubMenuItem {
   label: string;
@@ -28,6 +29,7 @@ interface MenuItem {
 })
 export class SidebarComponent {
   private messagesService = inject(MessagesService);
+  private calendarService = inject(CalendarService);
 
   protected readonly isCollapsed = signal(false);
   protected readonly expandedItem = signal<string | null>(null);
@@ -35,6 +37,12 @@ export class SidebarComponent {
   // Computed badge for messages with dynamic count
   protected readonly messagesBadge = computed(() => {
     const count = this.messagesService.unreadCount();
+    return count > 0 ? count.toString() : undefined;
+  });
+
+  // Computed badge for calendar with today's events count
+  protected readonly calendarBadge = computed(() => {
+    const count = this.calendarService.todayEvents().length;
     return count > 0 ? count.toString() : undefined;
   });
 
@@ -97,6 +105,7 @@ export class SidebarComponent {
       label: 'Calendar',
       icon: 'calendar_today',
       route: '/calendar',
+      badge: this.calendarBadge(),
     },
     {
       label: 'Settings',

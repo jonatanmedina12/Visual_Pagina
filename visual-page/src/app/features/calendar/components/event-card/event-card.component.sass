@@ -1,0 +1,184 @@
+.event-card
+  display: flex
+  gap: 1rem
+  padding: 1rem
+  background: white
+  border-radius: 8px
+  border-left: 4px solid transparent
+  transition: all 0.3s ease
+  cursor: pointer
+
+  &:hover
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
+    transform: translateX(2px)
+
+  &.today
+    background: #f3f8ff
+    border-left-color: #2196f3
+
+  &.past
+    opacity: 0.7
+
+  &.event-type-meeting
+    border-left-color: #4caf50
+
+  &.event-type-presentation
+    border-left-color: #ff9800
+
+  &.event-type-deadline
+    border-left-color: #f44336
+
+  &.event-type-training
+    border-left-color: #9c27b0
+
+  &.event-type-maintenance
+    border-left-color: #607d8b
+
+  &.event-type-event
+    border-left-color: #2196f3
+
+  &.priority-high
+    box-shadow: 0 0 0 1px #f44336 inset
+
+.event-indicator
+  flex-shrink: 0
+
+  .event-icon
+    width: 48px
+    height: 48px
+    border-radius: 8px
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+    color: white
+    display: flex
+    align-items: center
+    justify-content: center
+
+    .material-icons
+      font-size: 1.5rem
+
+.event-content
+  flex: 1
+  min-width: 0
+  display: flex
+  flex-direction: column
+  gap: 0.5rem
+
+.event-header
+  display: flex
+  justify-content: space-between
+  align-items: center
+  gap: 1rem
+
+.event-info
+  display: flex
+  align-items: center
+  gap: 0.5rem
+  flex: 1
+  min-width: 0
+
+.event-title
+  font-weight: 600
+  color: #333
+  font-size: 1rem
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.today-badge
+  background: #2196f3
+  color: white
+  padding: 0.125rem 0.5rem
+  border-radius: 12px
+  font-size: 0.75rem
+  font-weight: 600
+  white-space: nowrap
+  flex-shrink: 0
+
+.event-time
+  font-size: 0.875rem
+  font-weight: 600
+  color: #2196f3
+  white-space: nowrap
+  flex-shrink: 0
+
+.event-description
+  color: #666
+  font-size: 0.9rem
+  line-height: 1.4
+  display: -webkit-box
+  -webkit-line-clamp: 2
+  -webkit-box-orient: vertical
+  overflow: hidden
+
+.event-details
+  display: flex
+  gap: 1rem
+  flex-wrap: wrap
+
+  .detail-item
+    display: flex
+    align-items: center
+    gap: 0.25rem
+    color: #666
+    font-size: 0.85rem
+
+    .material-icons
+      font-size: 1rem
+      color: #999
+
+.event-footer
+  display: flex
+  gap: 0.75rem
+  align-items: center
+  margin-top: 0.25rem
+
+.attendees
+  display: flex
+  align-items: center
+  gap: 0.25rem
+  padding: 0.25rem 0.5rem
+  background: #e8f5e9
+  color: #2e7d32
+  border-radius: 4px
+  font-size: 0.75rem
+  font-weight: 500
+
+  .material-icons
+    font-size: 0.9rem
+
+.priority-badge
+  display: flex
+  align-items: center
+  gap: 0.25rem
+  color: #f44336
+  font-size: 0.75rem
+  font-weight: 500
+
+  .material-icons
+    font-size: 1rem
+
+@media (max-width: 768px)
+  .event-card
+    gap: 0.75rem
+    padding: 0.875rem
+
+  .event-indicator
+    .event-icon
+      width: 40px
+      height: 40px
+
+      .material-icons
+        font-size: 1.25rem
+
+  .event-title
+    font-size: 0.9rem
+
+  .event-time
+    font-size: 0.8rem
+
+  .event-details
+    gap: 0.5rem
+    flex-direction: column
+
+  .event-description
+    -webkit-line-clamp: 1
