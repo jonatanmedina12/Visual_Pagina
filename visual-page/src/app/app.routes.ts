@@ -27,6 +27,11 @@ export const routes: Routes = [
       import('./features/messages/messages.routing').then((m) => m.routes),
   },
   {
+    path: 'calendar',
+    loadChildren: () =>
+      import('./features/calendar/calendar.routing').then((m) => m.routes),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

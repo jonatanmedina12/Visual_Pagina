@@ -1,0 +1,17 @@
+<div class="calendar-page">
+  <app-header></app-header>
+
+  <div class="page-layout">
+    <app-sidebar></app-sidebar>
+
+    <main class="main-content">
+      <div class="calendar-container">
+        <app-calendar-view
+          [events]="events()"
+          [loading]="isLoading()"
+          (eventClick)="onEventClick($event)">
+        </app-calendar-view>
+      </div>
+    </main>
+  </div>
+</div>

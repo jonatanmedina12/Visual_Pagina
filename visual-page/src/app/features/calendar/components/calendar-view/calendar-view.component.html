@@ -1,0 +1,111 @@
+<div class="calendar-view-container">
+  <!-- Header with search and filters -->
+  <div class="calendar-header">
+    <div class="header-title">
+      <h2>Calendario</h2>
+      @if (todayCount() > 0) {
+        <span class="today-count-badge">{{ todayCount() }} hoy</span>
+      }
+    </div>
+
+    <div class="calendar-controls">
+      <!-- Search bar -->
+      <div class="search-box">
+        <i class="material-icons">search</i>
+        <input
+          type="text"
+          placeholder="Buscar eventos..."
+          [value]="searchTerm()"
+          (input)="onSearchChange($event)"
+          class="search-input">
+      </div>
+
+      <!-- Filter buttons -->
+      <div class="filter-buttons">
+        <button
+          class="filter-btn"
+          [class.active]="selectedFilter() === 'all'"
+          (click)="onFilterChange('all')">
+          Todos
+        </button>
+        <button
+          class="filter-btn"
+          [class.active]="selectedFilter() === 'today'"
+          (click)="onFilterChange('today')">
+          Hoy
+        </button>
+        <button
+          class="filter-btn"
+          [class.active]="selectedFilter() === 'upcoming'"
+          (click)="onFilterChange('upcoming')">
+          Próximos
+        </button>
+        <button
+          class="filter-btn"
+          [class.active]="selectedFilter() === 'past'"
+          (click)="onFilterChange('past')">
+          Pasados
+        </button>
+      </div>
+
+      <!-- Type and Priority filters -->
+      <div class="advanced-filters">
+        <div class="type-filter">
+          <select
+            class="type-select"
+            [value]="selectedType()"
+            (change)="onTypeChange($event)">
+            <option value="all">Todos los tipos</option>
+            <option value="meeting">Reuniones</option>
+            <option value="event">Eventos</option>
+            <option value="deadline">Fechas límite</option>
+            <option value="training">Capacitaciones</option>
+            <option value="presentation">Presentaciones</option>
+            <option value="maintenance">Mantenimiento</option>
+          </select>
+        </div>
+
+        <div class="priority-filter">
+          <select
+            class="priority-select"
+            [value]="selectedPriority()"
+            (change)="onPriorityChange($event)">
+            <option value="all">Todas las prioridades</option>
+            <option value="high">Alta prioridad</option>
+            <option value="normal">Normal</option>
+            <option value="low">Baja prioridad</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Events list -->
+  <div class="events-list">
+    @if (loading) {
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Cargando eventos...</p>
+      </div>
+    } @else if (filteredEvents().length === 0) {
+      <div class="empty-state">
+        <i class="material-icons">event_busy</i>
+        <h3>No hay eventos</h3>
+        <p>
+          @if (searchTerm() || selectedFilter() !== 'all' || selectedType() !== 'all' || selectedPriority() !== 'all') {
+            No se encontraron eventos con los filtros aplicados
+          } @else {
+            No tienes eventos programados en este momento
+          }
+        </p>
+      </div>
+    } @else {
+      @for (event of filteredEvents(); track event.id) {
+        <app-event-card
+          [event]="event"
+          (eventClick)="onEventClick($event)">
+        </app-event-card>
+      }
+    }
+  </div>
+</div>
